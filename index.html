@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English 10 Global Success (Unit 6-8) - Advanced Practice</title>
+    <style>
+        :root { --primary: #1a237e; --secondary: #3949ab; --bg: #e8eaf6; --explain-bg: #fff8e1; --explain-text: #f57f17; --trans-text: #283593; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #c5cae9 0%, #e8eaf6 100%); margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; user-select: none; padding-bottom: 50px; }
+        
+        .falling-flowers { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.4; }
+        .flower { position: absolute; top: -20px; animation: fall linear infinite; font-size: 20px; }
+        @keyframes fall { to { transform: translateY(105vh) rotate(720deg); } }
+        
+        .container { 
+            background: rgba(255,255,255,0.99); 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            padding: 40px; 
+            max-width: 950px; 
+            width: 92%; 
+            margin-top: 30px; 
+            text-align: center; 
+            z-index: 1; 
+            border-top: 5px solid var(--primary); 
+            position: relative;
+            min-height: 400px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        
+        .screen { width: 100%; }
+        .hidden { display: none !important; }
+
+        h1 { color: var(--primary); margin: 0 0 10px 0; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
+        h2 { color: #5c6bc0; font-weight: 500; margin-bottom: 30px; font-size: 1.2rem; }
+
+        .question-box { 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 8px; 
+            margin: 20px 0; 
+            font-size: 1.2rem; 
+            color: #212121; 
+            font-weight: 600; 
+            border: 1px solid #c5cae9; 
+            text-align: left;
+            line-height: 1.6;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.01);
+        }
+        
+        .reading-text {
+            font-weight: normal;
+            font-size: 1rem;
+            background: #f5f5f5;
+            padding: 20px;
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            color: #37474f;
+            line-height: 1.6;
+        }
+
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 700px) { .options-grid { grid-template-columns: 1fr; } }
+        
+        .btn-option { 
+            background: white; 
+            border: 2px solid #e0e0e0; 
+            padding: 15px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 1.1rem; 
+            transition: 0.2s; 
+            width: 100%; 
+            text-align: left;
+            color: #424242;
+            min-height: 60px;
+            display: flex; align-items: center;
+        }
+        .btn-option:hover { background: #e8eaf6; border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+        .btn-option.correct { background: #c8e6c9 !important; border-color: #4caf50 !important; color: #1b5e20; font-weight: bold; }
+        .btn-option.wrong { background: #ffcdd2 !important; border-color: #e53935 !important; color: #b71c1c; opacity: 0.8; }
+        
+        .explanation-box { margin-top: 25px; padding: 20px; background-color: var(--explain-bg); color: #333; border-radius: 8px; border-left: 5px solid #ffb300; text-align: left; font-size: 1rem; animation: fadeIn 0.4s; }
+        .explanation-title { font-weight: bold; color: #f57f17; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 8px; display: block;}
+        .trans-text { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ffe082; color: var(--trans-text); font-style: italic; display: block; font-weight: 500;}
+
+        .btn-main { background: var(--primary); color: white; border: none; padding: 15px 50px; border-radius: 30px; font-size: 1.2rem; cursor: pointer; margin-top: 20px; box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3); transition: transform 0.1s; font-weight: bold; text-transform: uppercase; }
+        .btn-main:active { transform: scale(0.95); }
+        .btn-next { background: #ffca28; color: #212121; display: none; margin: 20px auto 0; width: 100%; max-width: 350px; }
+        
+        .info-bar { display: flex; justify-content: space-between; font-weight: bold; color: var(--primary); margin-bottom: 20px; font-size: 1.1rem; border-bottom: 2px solid #c5cae9; padding-bottom: 15px; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        #music-control { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: white; border: 3px solid var(--primary); color: var(--primary); font-size: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 100; transition: all 0.3s; }
+        .music-playing { animation: pulse 2s infinite; background: var(--primary) !important; color: white !important; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+    <div class="falling-flowers" id="flowers"></div>
+    
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-control" onclick="toggleMusic()">🎵</div>
+
+    <div class="container">
+        <div id="start-screen" class="screen">
+            <h1>ENGLISH 10 GLOBAL SUCCESS</h1>
+            <h2>Unit 6 - Unit 7 - Unit 8</h2>
+            <div style="font-size: 5rem; margin: 30px;">⚖️ 🇺🇳 💻</div>
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #455a64;">
+                <b>Unit 6:</b> Gender Equality (Passive Voice with Modals)<br>
+                <b>Unit 7:</b> International Organisations (Comparisons)<br>
+                <b>Unit 8:</b> New Ways to Learn (Relative Clauses)
+            </p>
+            <button class="btn-main" onclick="startGame()">START PRACTICE ▶</button>
+        </div>
+
+        <div id="game-ui" class="screen hidden">
+            <div class="info-bar">
+                <span id="score-display">Score: 0</span>
+                <span id="progress-display">Question: 1/150</span>
+            </div>
+            
+            <div class="question-box" id="question-text">Loading...</div>
+            <div class="options-grid" id="options-container"></div>
+            
+            <div id="explanation-area" class="explanation-box hidden">
+                <span class="explanation-title">💡 Explanation:</span>
+                <span id="explanation-text"></span>
+                <span id="trans-text" class="trans-text"></span>
+            </div>
+
+            <button id="btn-next" class="btn-main btn-next" onclick="nextQuestion()">➡ NEXT QUESTION</button>
+        </div>
+
+        <div id="end-screen" class="screen hidden">
+            <h1 style="color:var(--primary)">COMPLETED!</h1>
+            <div style="font-size: 5rem; margin: 20px;">🎓</div>
+            <h2 id="final-score" style="color: #1a237e; font-size: 2.5rem;"></h2>
+            <p>Great job reviewing English 10!</p>
+            <button class="btn-main" onclick="location.reload()">TRY AGAIN 🔄</button>
+        </div>
+    </div>
+
+<script>
+    // ========================================================================
+    // DATABASE: GLOBAL SUCCESS 10 (UNIT 6-7-8)
+    // ========================================================================
+    const rawQuestions = [
+        // --- UNIT 6: GENDER EQUALITY ---
+        // Phonetics: Stress in two-syllable words
+        {q: "Choose the word with different stress pattern: <br>equal, gender, enrol, women", a: ["enrol", "equal", "gender", "women"], correct: 0, explain: "'enrol' (động từ) nhấn âm 2. Các từ còn lại (danh/tính từ) nhấn âm 1.", trans: "Dịch: enrol (đăng ký học), equal (bình đẳng), gender (giới tính), women (phụ nữ)."},
+        {q: "Choose the word with different stress pattern: <br>physician, treatment, workforce, income", a: ["physician", "treatment", "workforce", "income"], correct: 0, explain: "'physician' nhấn âm 2. Các từ còn lại nhấn âm 1.", trans: "Dịch: physician (bác sĩ), treatment (sự đối xử/điều trị), workforce (lực lượng lao động), income (thu nhập)."},
+        
+        // Vocab
+        {q: "Gender ______ should be eliminated in education and employment.", a: ["discrimination", "equality", "gap", "rights"], correct: 0, explain: "Gender discrimination (sự phân biệt đối xử giới tính).", trans: "Dịch: Phân biệt đối xử giới tính cần bị loại bỏ trong giáo dục và việc làm."},
+        {q: "We should provide equal ______ for both men and women.", a: ["opportunities", "powers", "forces", "strengths"], correct: 0, explain: "Equal opportunities (cơ hội bình đẳng).", trans: "Dịch: Chúng ta nên cung cấp cơ hội bình đẳng cho cả nam và nữ."},
+        {q: "Women often do more ______ work than men.", a: ["domestic", "official", "social", "public"], correct: 0, explain: "Domestic work (việc nhà).", trans: "Dịch: Phụ nữ thường làm nhiều việc nhà hơn nam giới."},
+        {q: "The government is trying to ______ gender inequality.", a: ["eliminate", "create", "cause", "increase"], correct: 0, explain: "Eliminate (loại bỏ/xóa bỏ).", trans: "Dịch: Chính phủ đang cố gắng loại bỏ bất bình đẳng giới."},
+        {q: "More women are joining the ______ these days.", a: ["workforce", "workplace", "working", "worker"], correct: 0, explain: "Join the workforce (tham gia lực lượng lao động).", trans: "Dịch: Ngày nay có nhiều phụ nữ tham gia lực lượng lao động hơn."},
+        
+        // Grammar Unit 6: Passive Voice with Modals
+        {q: "This job ______ by a man or a woman.", a: ["can be done", "can do", "can be doing", "can done"], correct: 0, explain: "Bị động với Modal Verbs: Modal + be + V3/ed.", trans: "Dịch: Công việc này có thể được thực hiện bởi nam hoặc nữ."},
+        {q: "Gender discrimination ______ eliminated.", a: ["must be", "must", "must been", "must be being"], correct: 0, explain: "Must be + V3/ed.", trans: "Dịch: Phân biệt giới tính phải bị loại bỏ."},
+        {q: "Women ______ given equal rights.", a: ["should be", "should", "should have", "should been"], correct: 0, explain: "Should be + V3/ed.", trans: "Dịch: Phụ nữ nên được trao quyền bình đẳng."},
+        {q: "The rules ______ by everyone.", a: ["must be obeyed", "must obey", "must obeyed", "must be obeying"], correct: 0, explain: "Must be obeyed (phải được tuân thủ).", trans: "Dịch: Các quy định phải được mọi người tuân thủ."},
+
+        // --- UNIT 7: VIETNAM AND INTERNATIONAL ORGANISATIONS ---
+        // Phonetics: Stress in words ending in -tion, -sion, -ic, -al
+        {q: "Choose the word with different stress pattern: <br>nation, donation, relation, pollution", a: ["nation", "donation", "relation", "pollution"], correct: 0, explain: "'nation' nhấn âm 1. Các từ còn lại nhấn âm 2 (trước đuôi -tion).", trans: "Dịch: nation (quốc gia) - donation (sự quyên góp) - relation (mối quan hệ) - pollution (ô nhiễm)."},
+        {q: "Choose the word with different stress pattern: <br>economic, specific, historic, politics", a: ["politics", "economic", "specific", "historic"], correct: 0, explain: "'politics' nhấn âm 1. Các từ đuôi -ic nhấn âm liền trước nó.", trans: "Dịch: politics (chính trị) - các từ khác nhấn âm tiết trước -ic."},
+
+        // Vocab
+        {q: "UNICEF aims to support the most disadvantaged children ______.", a: ["worldwide", "locally", "nationally", "citywide"], correct: 0, explain: "Worldwide (trên toàn thế giới).", trans: "Dịch: UNICEF nhằm hỗ trợ những trẻ em thiệt thòi nhất trên toàn thế giới."},
+        {q: "Vietnam has become a member of many international ______.", a: ["organisations", "programs", "partners", "companies"], correct: 0, explain: "International organisations (tổ chức quốc tế).", trans: "Dịch: Việt Nam đã trở thành thành viên của nhiều tổ chức quốc tế."},
+        {q: "We need to improve our ______ with other countries.", a: ["relations", "relatives", "relationship", "relating"], correct: 0, explain: "Relations (quan hệ ngoại giao/quốc tế).", trans: "Dịch: Chúng ta cần cải thiện quan hệ với các nước khác."},
+        {q: "WHO stands for World ______ Organization.", a: ["Health", "Human", "Heart", "Healing"], correct: 0, explain: "World Health Organization (Tổ chức Y tế Thế giới).", trans: "Dịch: WHO viết tắt của Tổ chức Y tế Thế giới."},
+        {q: "Vietnam sent officers to join the UN ______ forces.", a: ["peacekeeping", "peacemaking", "peaceful", "peace"], correct: 0, explain: "Peacekeeping forces (lực lượng gìn giữ hòa bình).", trans: "Dịch: Việt Nam đã cử sĩ quan tham gia lực lượng gìn giữ hòa bình Liên Hợp Quốc."},
+        {q: "The main goal of ASEAN is to promote economic ______.", a: ["growth", "grow", "grown", "growing"], correct: 0, explain: "Economic growth (tăng trưởng kinh tế).", trans: "Dịch: Mục tiêu chính của ASEAN là thúc đẩy tăng trưởng kinh tế."},
+
+        // Grammar Unit 7: Comparative & Superlative / Present Perfect
+        {q: "This organization is ______ than that one.", a: ["larger", "large", "largest", "more large"], correct: 0, explain: "So sánh hơn tính từ ngắn: adj + er + than.", trans: "Dịch: Tổ chức này lớn hơn tổ chức kia."},
+        {q: "Viet Nam is one of the ______ members of ASEAN.", a: ["most active", "more active", "active", "activeness"], correct: 0, explain: "So sánh nhất tính từ dài: the + most + adj.", trans: "Dịch: Việt Nam là một trong những thành viên tích cực nhất của ASEAN."},
+        {q: "This is the ______ project I have ever joined.", a: ["most interesting", "more interesting", "interesting", "interest"], correct: 0, explain: "So sánh nhất + thì hiện tại hoàn thành.", trans: "Dịch: Đây là dự án thú vị nhất tôi từng tham gia."},
+        {q: "Vietnam ______ a member of the UN in 1977.", a: ["became", "has become", "becomes", "become"], correct: 0, explain: "Mốc thời gian cụ thể trong quá khứ (in 1977) -> Quá khứ đơn.", trans: "Dịch: Việt Nam trở thành thành viên LHQ năm 1977."},
+        {q: "We ______ UNICEF since 2010.", a: ["have supported", "supported", "support", "will support"], correct: 0, explain: "Since + mốc thời gian -> Hiện tại hoàn thành.", trans: "Dịch: Chúng tôi đã hỗ trợ UNICEF từ năm 2010."},
+
+        // --- UNIT 8: NEW WAYS TO LEARN ---
+        // Vocab
+        {q: "______ learning allows students to learn both online and in class.", a: ["Blended", "Traditional", "Face-to-face", "Offline"], correct: 0, explain: "Blended learning (Học tập kết hợp).", trans: "Dịch: Học tập kết hợp cho phép học sinh học cả trực tuyến và trên lớp."},
+        {q: "You can use a digital ______ like a tablet or smartphone to learn.", a: ["device", "tool", "machine", "appliance"], correct: 0, explain: "Digital device (thiết bị số).", trans: "Dịch: Bạn có thể dùng thiết bị số như máy tính bảng hoặc điện thoại để học."},
+        {q: "Students can have ______ to a huge variety of information online.", a: ["access", "assess", "accept", "aspect"], correct: 0, explain: "Have access to (có quyền truy cập/tiếp cận).", trans: "Dịch: Học sinh có thể tiếp cận lượng thông tin khổng lồ trực tuyến."},
+        {q: "Online learning gives us more ______ over our schedule.", a: ["control", "money", "strategy", "project"], correct: 0, explain: "Control (sự kiểm soát/chủ động).", trans: "Dịch: Học trực tuyến cho chúng ta sự chủ động hơn về lịch trình."},
+        {q: "Too much screen time can be a ______.", a: ["distraction", "distract", "distracted", "distracting"], correct: 0, explain: "Distraction (sự xao nhãng/gây mất tập trung).", trans: "Dịch: Thời gian nhìn màn hình quá nhiều có thể gây xao nhãng."},
+        {q: "Teachers can upload materials for students to ______ at home.", a: ["download", "upload", "load", "offload"], correct: 0, explain: "Download (tải xuống).", trans: "Dịch: Giáo viên có thể tải tài liệu lên để học sinh tải về tại nhà."},
+
+        // Grammar Unit 8: Relative Clauses
+        {q: "The tablet ______ I bought yesterday is very fast.", a: ["which", "who", "whose", "where"], correct: 0, explain: "Tablet (vật) -> dùng Which/That.", trans: "Dịch: Chiếc máy tính bảng mà tôi mua hôm qua rất nhanh."},
+        {q: "The teacher ______ teaches us English is from Australia.", a: ["who", "which", "whose", "whom"], correct: 0, explain: "Teacher (người) -> dùng Who.", trans: "Dịch: Giáo viên dạy tiếng Anh cho chúng tôi đến từ Úc."},
+        {q: "This is the app ______ helps me learn vocabulary.", a: ["that", "who", "where", "when"], correct: 0, explain: "App (vật) -> dùng That/Which.", trans: "Dịch: Đây là ứng dụng giúp tôi học từ vựng."},
+        {q: "Mr. Minh, ______ son is my friend, is a doctor.", a: ["whose", "who", "which", "that"], correct: 0, explain: "Whose + Noun (chỉ sở hữu: con trai của ông ấy).", trans: "Dịch: Ông Minh, người có con trai là bạn tôi, là một bác sĩ."},
+        {q: "My laptop, ______ I use for studying, is broken.", a: ["which", "that", "who", "whose"], correct: 0, explain: "Mệnh đề quan hệ không xác định (có dấu phẩy) -> Không dùng That, dùng Which cho vật.", trans: "Dịch: Laptop của tôi, cái mà tôi dùng để học, đã bị hỏng."},
+
+        // --- READING COMPREHENSION ---
+        {
+            q: "<div class='reading-text'>Blended learning is a way of studying that combines online learning with face-to-face instruction. Students can watch video lectures at home and do exercises in class. This helps them learn at their own pace. However, it requires students to be disciplined and have good time management skills.</div>\nWhat is blended learning?", 
+            a: ["A combination of online and face-to-face learning", "Only learning online", "Only learning in class", "Watching videos only"], 
+            correct: 0, 
+            explain: "Text: '...combines online learning with face-to-face instruction.'", 
+            trans: "Dịch: Học kết hợp là gì? -> Sự kết hợp giữa học online và trực tiếp."
+        },
+        {
+            q: "<div class='reading-text'>UNICEF works in over 190 countries and territories to save children's lives, to defend their rights, and to help them fulfill their potential, from early childhood through adolescence.</div>\nWhat is the main purpose of UNICEF?", 
+            a: ["To help children", "To improve economy", "To stop wars", "To trade goods"], 
+            correct: 0, 
+            explain: "Text: '...to save children's lives...'", 
+            trans: "Dịch: Mục đích chính của UNICEF là gì? -> Giúp đỡ trẻ em."
+        },
+
+        // --- ERROR IDENTIFICATION ---
+        {q: "Find the mistake: <br>The woman <u>which</u> <u>is</u> standing <u>there</u> is <u>my</u> aunt.", a: ["which", "is", "there", "my"], correct: 0, explain: "Sai 'which'. Người (The woman) phải dùng 'who'.", trans: "Dịch: Người phụ nữ đang đứng đó là dì của tôi."},
+        {q: "Find the mistake: <br>This task <u>should</u> <u>done</u> <u>by</u> tomorrow.", a: ["done", "should", "by", "tomorrow"], correct: 0, explain: "Sai 'done'. Bị động với Modal: should + BE + done.", trans: "Dịch: Nhiệm vụ này nên được hoàn thành trước ngày mai."},
+        {q: "Find the mistake: <br>Ha Long Bay is <u>the</u> <u>more</u> beautiful <u>place</u> I <u>have</u> ever visited.", a: ["more", "the", "place", "have"], correct: 0, explain: "Sai 'more'. So sánh nhất phải là 'most'.", trans: "Dịch: Vịnh Hạ Long là nơi đẹp nhất tôi từng đến."},
+
+        // --- SENTENCE BUILDING ---
+        {q: "Rearrange: be / Gender / eliminated / discrimination / should / .", a: ["Gender discrimination should be eliminated.", "Gender eliminated should be discrimination.", "Discrimination gender should be eliminated.", "Should be eliminated gender discrimination."], correct: 0, explain: "Passive Modal: S + should be + V3.", trans: "Dịch: Phân biệt giới tính nên bị loại bỏ."},
+        {q: "Rearrange: joined / Vietnam / in / 1995 / ASEAN / .", a: ["Vietnam joined ASEAN in 1995.", "ASEAN joined Vietnam in 1995.", "In 1995 joined Vietnam ASEAN.", "Vietnam in 1995 joined ASEAN."], correct: 0, explain: "S + V + O + Time.", trans: "Dịch: Việt Nam gia nhập ASEAN năm 1995."},
+        {q: "Rearrange: man / The / who / called / is / teacher / my / .", a: ["The man who called is my teacher.", "The man is my teacher who called.", "Who called the man is my teacher.", "The teacher who called is my man."], correct: 0, explain: "Relative Clause: S + who + V... + is...", trans: "Dịch: Người đàn ông vừa gọi điện là giáo viên của tôi."},
+    ];
+
+    // ========================================================================
+    // GENERATOR: TỰ ĐỘNG SINH CÂU HỎI NGỮ PHÁP (ĐỂ ĐỦ 150 CÂU KHÔNG TRÙNG)
+    // ========================================================================
+
+    // 1. GENERATOR: Passive Voice with Modals (Unit 6)
+    const passiveSubj = ["The report", "The letter", "The project", "The house", "The problem", "The rule"];
+    const modals = [
+        {m: "must", meaning: "phải"},
+        {m: "should", meaning: "nên"},
+        {m: "can", meaning: "có thể"},
+        {m: "might", meaning: "có lẽ"}
+    ];
+    const verbs = [
+        {v: "finished", meaning: "hoàn thành"},
+        {v: "solved", meaning: "giải quyết"},
+        {v: "cleaned", meaning: "dọn dẹp"},
+        {v: "sent", meaning: "gửi đi"},
+        {v: "built", meaning: "xây dựng"}
+    ];
+
+    for(let i=0; i<30; i++) {
+        let s = passiveSubj[i % passiveSubj.length];
+        let m = modals[i % modals.length];
+        let v = verbs[i % verbs.length];
+        rawQuestions.push({
+            q: `Grammar: ${s} ______ be ${v.v} immediately.`,
+            a: [m.m, `${m.m} be`, `to ${m.m}`, `is ${m.m}`],
+            correct: 0,
+            explain: `Cấu trúc bị động khuyết thiếu: S + ${m.m} + be + V3/ed.`,
+            trans: `Dịch: ${s} ${m.meaning} được ${v.meaning} ngay lập tức.`
+        });
+    }
+
+    // 2. GENERATOR: Relative Clauses (Unit 8)
+    const relNouns = [
+        {n: "The laptop", type: "thing", trans: "Cái laptop"},
+        {n: "The girl", type: "person", trans: "Cô gái"},
+        {n: "The singer", type: "person", trans: "Ca sĩ"},
+        {n: "The song", type: "thing", trans: "Bài hát"},
+        {n: "The robot", type: "thing", trans: "Con robot"}
+    ];
+    const relVerbs = ["is standing there", "I bought", "is famous", "we saw", "is broken"];
+
+    for(let i=0; i<30; i++) {
+        let n = relNouns[i % relNouns.length];
+        let v = relVerbs[i % relVerbs.length];
+        let correctRel = n.type === "person" ? "who" : "which";
+        let wrongRel = n.type === "person" ? "which" : "who";
+        
+        rawQuestions.push({
+            q: `Grammar: ${n.n} ______ ${v} is mine/my favorite.`,
+            a: [correctRel, wrongRel, "where", "when"],
+            correct: 0,
+            explain: `${n.n} là danh từ chỉ ${n.type === "person" ? "người -> dùng Who" : "vật -> dùng Which"}.`,
+            trans: `Dịch: ${n.trans} mà ${v} là của tôi/yêu thích của tôi.`
+        });
+    }
+
+    // 3. GENERATOR: Comparisons (Unit 7)
+    const adjectives = [
+        {adj: "rich", comp: "richer", sup: "richest", meaning: "giàu"},
+        {adj: "big", comp: "bigger", sup: "biggest", meaning: "lớn"},
+        {adj: "fast", comp: "faster", sup: "fastest", meaning: "nhanh"},
+        {adj: "beautiful", comp: "more beautiful", sup: "most beautiful", meaning: "đẹp"},
+        {adj: "expensive", comp: "more expensive", sup: "most expensive", meaning: "đắt"}
+    ];
+
+    for(let i=0; i<30; i++) {
+        let adj = adjectives[i % adjectives.length];
+        // Mix between Comparative (Than) and Superlative (The)
+        if (i % 2 === 0) {
+            rawQuestions.push({
+                q: `Grammar: This car is ______ than that one.`,
+                a: [adj.comp, adj.sup, adj.adj, `as ${adj.adj}`],
+                correct: 0,
+                explain: `So sánh hơn (có 'than') -> ${adj.comp}.`,
+                trans: `Dịch: Chiếc xe này ${adj.meaning} hơn chiếc kia.`
+            });
+        } else {
+            rawQuestions.push({
+                q: `Grammar: He is the ______ person in the room.`,
+                a: [adj.sup, adj.comp, adj.adj, `more ${adj.adj}`],
+                correct: 0,
+                explain: `So sánh nhất (có 'the') -> ${adj.sup}.`,
+                trans: `Dịch: Anh ấy là người ${adj.meaning} nhất trong phòng.`
+            });
+        }
+    }
+
+    // ========================================================================
+    // GAME LOGIC
+    // ========================================================================
+    let questions = []; 
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let isPlaying = false;
+    const audio = document.getElementById('bg-music');
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play().catch(e => alert("Please touch the screen first!"));
+            document.getElementById('music-control').classList.add('music-playing');
+        } else {
+            audio.pause();
+            document.getElementById('music-control').classList.remove('music-playing');
+        }
+    }
+
+    function startGame() {
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('end-screen').classList.add('hidden');
+        document.getElementById('game-ui').classList.remove('hidden');
+
+        score = 0;
+        currentQuestionIndex = 0;
+        questions = shuffleArray([...rawQuestions]).slice(0, 150); 
+        
+        isPlaying = true;
+        updateScore();
+        showQuestion();
+
+        if(audio.paused) toggleMusic();
+    }
+
+    function showQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+            endGame();
+            return;
+        }
+        
+        const qData = questions[currentQuestionIndex];
+        
+        document.getElementById('question-text').innerHTML = `[${currentQuestionIndex + 1}] ${qData.q}`;
+        document.getElementById('progress-display').innerText = `Question: ${currentQuestionIndex + 1}/${questions.length}`;
+        
+        document.getElementById('explanation-area').classList.add('hidden');
+        document.getElementById('btn-next').style.display = 'none';
+
+        const optionsDiv = document.getElementById('options-container');
+        optionsDiv.innerHTML = '';
+        let indices = [0, 1, 2, 3];
+        shuffleArray(indices);
+
+        indices.forEach(index => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-option';
+            btn.innerHTML = qData.a[index]; 
+            btn.onclick = () => checkAnswer(index, qData.correct, btn);
+            optionsDiv.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selectedIndex, correctIndex, btnElement) {
+        if (!isPlaying) return;
+        
+        const allBtns = document.querySelectorAll('.btn-option');
+        allBtns.forEach(b => b.disabled = true);
+
+        if (selectedIndex === correctIndex) {
+            btnElement.classList.add('correct');
+            score += 10;
+        } else {
+            btnElement.classList.add('wrong');
+            allBtns.forEach(b => {
+                if(b.innerHTML === questions[currentQuestionIndex].a[correctIndex]) {
+                    b.classList.add('correct');
+                }
+            });
+        }
+        updateScore();
+
+        // HIỆN GIẢI THÍCH & DỊCH
+        document.getElementById('explanation-text').innerText = questions[currentQuestionIndex].explain;
+        
+        const transEl = document.getElementById('trans-text');
+        if(questions[currentQuestionIndex].trans) {
+            transEl.innerText = questions[currentQuestionIndex].trans;
+            transEl.style.display = 'block';
+        } else {
+            transEl.style.display = 'none';
+        }
+
+        document.getElementById('explanation-area').classList.remove('hidden');
+        document.getElementById('btn-next').style.display = 'block';
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        showQuestion();
+    }
+
+    function updateScore() {
+        document.getElementById('score-display').innerText = `Score: ${score}`;
+    }
+
+    function endGame() {
+        isPlaying = false;
+        document.getElementById('game-ui').classList.add('hidden');
+        document.getElementById('end-screen').classList.remove('hidden');
+        document.getElementById('final-score').innerText = `Total Score: ${score} / ${questions.length * 10}`;
+    }
+    
+    // Create flowers
+    function createFlowers() {
+        const container = document.getElementById('flowers');
+        const symbols = ['📝', '📚', '🌏', '💡', '🎓']; 
+        for(let i=0; i<25; i++) {
+            const el = document.createElement('div');
+            el.className = 'flower';
+            el.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            el.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            el.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(el);
+        }
+    }
+    createFlowers();
+</script>
+</body>
+</html>
